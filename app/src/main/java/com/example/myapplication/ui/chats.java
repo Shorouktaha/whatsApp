@@ -11,24 +11,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.whatsapp.R;
+import com.example.whatsapp.databinding.FragmentChatBinding;
 import com.example.whatsapp.model.chatmodel;
 
 import java.util.ArrayList;
-public class chats extends Fragment {
-
-
-   RecyclerView recChat;
-   chatAdapter chatadapter;
-   ArrayList<chatmodel>chatData=new ArrayList<chatmodel>();
+public class chats extends Fragment implements chatAdapter.chatAction {
+        FragmentChatBinding binding;
+       RecyclerView recChat;
+       chatAdapter chatadapter;
+       ArrayList<chatmodel>chatData=new ArrayList<chatmodel>();
 
     public chats() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -38,12 +39,10 @@ public class chats extends Fragment {
     }
     private void setRecyclChat(){
         addFakeData();
-      chatadapter =new chatAdapter(chatData);
+      chatadapter =new chatAdapter(chatData,this::ChatCardClick);
       recChat.setAdapter(chatadapter);
       recChat.setLayoutManager(new LinearLayoutManager(
-              getContext()
-
-      ));
+              requireContext()));
     }
     private void addFakeData(){
 
@@ -87,7 +86,9 @@ public class chats extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void onChatCardClick(chatmodel chatmodel){
-        startActivity(new Intent(requireActivity(),chatActivity.class));
+
+    @Override
+    public void ChatCardClick(chatmodel chatmodel) {
+        startActivity(new Intent(requireActivity(),MessageChatFragment.class));
     }
 }

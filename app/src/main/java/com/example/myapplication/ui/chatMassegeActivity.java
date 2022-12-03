@@ -1,10 +1,13 @@
 package com.example.whatsapp.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class chatActivity extends AppCompatActivity {
+public class chatMassegeActivity extends AppCompatActivity {
  public final static String userId="s213";
  ActivityChatBinding binding;
  ArrayList<messageModel>list=new ArrayList<>();
@@ -66,5 +69,13 @@ public class chatActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        binding=null;
     }
 }

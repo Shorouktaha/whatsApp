@@ -34,7 +34,7 @@ ArrayList<messageModel>list;
     @Override
     public void onBindViewHolder(@NonNull holder holder, int position) {
         messageModel messageModel=list.get(position);
-        if(messageModel.getSenderId().equals(chatActivity.userId)){
+        if(messageModel.getSenderId().equals(MessageChatFragment.userId)){
             holder.binding.messChat.setGravity(Gravity.END);
         }
         else
